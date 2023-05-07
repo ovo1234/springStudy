@@ -28,10 +28,20 @@ public class LoginController {
     private final UserService userService;
 
     //@PreAuthorize("hasRole('ROLE_USER')")
-    @Secured({"ROLE_USER"})
+    //@Secured({"ROLE_USER"})
     @GetMapping("/loginUser/true")
     public String loginTrue() {
         return "loginTrue";
+    }
+
+    @GetMapping("/loginUser/fail")
+    public String loginFail() {
+        return "loginFalse";
+    }
+
+    @GetMapping("/access-denied")
+    public String accessDenied() {
+        return "접근 권한이 없습니다.";
     }
 
     @PostMapping("/loginUser")
@@ -46,7 +56,7 @@ public class LoginController {
 
              return userService.viewNickname(userRequestDto.getEmail()) + "님 환영합니다.";
          }
-        return "login Fail";
+        return "로그인실패";
     }
 
 }

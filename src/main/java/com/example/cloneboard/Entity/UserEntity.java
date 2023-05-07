@@ -2,6 +2,7 @@ package com.example.cloneboard.Entity;
 
 import com.example.cloneboard.Dto.BoardRequestDto;
 import com.example.cloneboard.Dto.UserRequestDto;
+import com.example.cloneboard.Model.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,24 +34,15 @@ public class UserEntity {
     @Column
     private String introduce;
 
-    @Column
-    private String role;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
 
     public void update(UserRequestDto userRequestDto) {
         this.email = userRequestDto.getEmail();
         this.password = userRequestDto.getPassword();
         this.nickname = userRequestDto.getNickname();
         this.introduce = userRequestDto.getIntroduce();
-        this.role = userRequestDto.getRole();
     }
 
-
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-
-        for(String role : role.split(",")){
-            authorities.add(new SimpleGrantedAuthority(role));
-        }
-        return authorities;
-    }
 }

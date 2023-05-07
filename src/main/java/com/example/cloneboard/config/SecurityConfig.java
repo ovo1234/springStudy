@@ -15,10 +15,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers( "/user/**", "/loginUser").permitAll() // 모든 사용자 접근 허용
                 //.antMatchers("/", "/board").authenticated()
                 .and()
-                .formLogin()
+                .formLogin().disable()
                     // 로그인 페이지를 제공하는 URL을 설정함
-                    //.loginPage("/login")
+//                    .loginPage("/loginUser")
                     //.defaultSuccessUrl("/login/true")
+                .logout()
+                    .permitAll()
+                .and()
+                    .exceptionHandling()
+                    .accessDeniedPage("/access-denied") // 권한이 없는 경우 이동할 URL
                 .and()
                     .httpBasic();
     }

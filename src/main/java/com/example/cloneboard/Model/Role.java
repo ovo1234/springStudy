@@ -1,12 +1,14 @@
 package com.example.cloneboard.Model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Getter
 public enum Role {
-    USER("ROLE_USER");
+    USER("ROLE_USER", "일반 사용자"),
+    ADMIN("ROLE_ADMIN", "관리자");
 
-    private String value;
+    private final String key;
+    private final String title;
 }
